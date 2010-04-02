@@ -8,9 +8,9 @@
 
 #import "MyCustomView.h"
 
+#define kAccelerometerFrequency        10 //Hz
 
-@implementation MyCustomView
-
+@implementation MyCustomView 
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -29,18 +29,18 @@
 	// You have to explicitly turn on multitouch for the view
 	self.multipleTouchEnabled = YES;
 	
-	// Configure for acceleraometer
+	// Configure for accelerometer
 	[self configureAccelerometer];
 }
 
 - (void)configureAccelerometer {
 	
-	UIAccelerometer *theAcceleromter = [UIAccelerometer sharedAccelerometer];
+	UIAccelerometer *theAccelerometer = [UIAccelerometer sharedAccelerometer];
 	
-	if(theAcceleromter) {
-		
-	UIAccelerometer.updateInterval = 1 / kAccelerometerFrequency;
-	theAccelerometer.deleget = self;
+	if(theAccelerometer) {
+	
+		theAccelerometer.delegate = self;
+		theAccelerometer.updateInterval = 1 / kAccelerometerFrequency;
 	}
 	else {
 		NSLog(@"Oops we're not running on the device!");
@@ -98,7 +98,7 @@
 	CGFloat centerx = rect.size.width/2;
 	CGFloat centery = rect.size.height/2;
 	CGFloat half = squareSize/2;
-	CGRect theRect = CGRectMake(-half, -half, squareSize, squareSize)
+	CGRect theRect = CGRectMake(-half, -half, squareSize, squareSize);
 	
 	// Grab the drawing context
 	CGContextRef context = UIGraphicsGetCurrentContext();
@@ -128,7 +128,6 @@
 	CGContextRestoreGState(context);
 	
 }
-
 
 - (void)dealloc {
     [super dealloc];
